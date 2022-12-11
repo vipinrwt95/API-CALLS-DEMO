@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useCallback} from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -21,7 +21,7 @@ function changetryingstate(){
       stopTimer(true);
   }
   
-  async function fetchMoviesHandler()
+const fetchMoviesHandler=useCallback(async()=>
   {  
       LoadingHandler(true)
       setError(null);  
@@ -48,11 +48,11 @@ function changetryingstate(){
       setError(error.message);
     }  
     LoadingHandler(false);
-  }
+  },[])
   useEffect(()=>
   {
    fetchMoviesHandler(); 
-  },[])
+  },[fetchMoviesHandler])
 
 let content=<p>Found no movies</p>
  if(movies.length>0)
