@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -49,6 +49,11 @@ function changetryingstate(){
     }  
     LoadingHandler(false);
   }
+  useEffect(()=>
+  {
+   fetchMoviesHandler(); 
+  },[])
+
 let content=<p>Found no movies</p>
  if(movies.length>0)
  {
@@ -69,10 +74,7 @@ if(timer)
 }
 return (
     <React.Fragment>
-      <section>
-        <button onClick={fetchMoviesHandler}>Fetch Movies</button>
-      </section>
-      <section>{content}</section>
+<section>{content}</section>
     </React.Fragment>
   );
 }
